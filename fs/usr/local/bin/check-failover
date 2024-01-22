@@ -1,0 +1,8 @@
+#!/bin/bash
+set -e
+
+# falha se o arquivo /var/cache/keepalived.failover foi modificado nos últimos 3 segundos
+result=$(find /var/cache/keepalived.failover -newermt "3 seconds ago")
+if [[ -n $result ]]; then
+  exit 1
+fi

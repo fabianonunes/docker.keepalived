@@ -1,0 +1,13 @@
+services:
+  keepalived_a: &keepalived
+    image: ${REPOSITORY:-localhost/keepalived}:${TAG:-beta}
+    build:
+      context: .
+    cap_add:
+    - NET_ADMIN
+    environment:
+      KEEPALIVED_INTERFACE: eth0
+      KEEPALIVED_VIRTUAL_ADDRESS: 192.0.2.200/24
+      KEEPALIVED_VIRTUAL_ROUTER_ID: 51
+  keepalived_b:
+    <<: *keepalived
